@@ -1,42 +1,35 @@
-# Copyright 1999-2015 Gentoo Foundation
+# Copyright 1999-2019 Gentoo Authors
 # Distributed under the terms of the GNU General Public License v2
-# $Header: $
+# $Id: 77337142ec368ef43c179461f5ca0beb09d5cd21 $
 
-EAPI="6"
-inherit eutils flag-o-matic
+EAPI=7
 
-DESCRIPTION="A handy personal organizer"
+DESCRIPTION="Handy personal organizer"
 HOMEPAGE="http://clayo.org/osmo/"
 SRC_URI="mirror://sourceforge/${PN}-pim/${P}.tar.gz"
-
 LICENSE="GPL-2"
 SLOT="0"
-KEYWORDS="amd64 x86"
-IUSE=""
-RESTRICT="mirror"
 
-RDEPEND=">=x11-libs/gtk+-2.12:2
-	>=dev-libs/libtar-1.2.11-r3
-	dev-libs/libxml2:2
-	>=dev-libs/libical-0.33
-	app-text/gtkspell:2
-	>=x11-libs/libnotify-0.7"
-DEPEND="${RDEPEND}
-    sys-devel/automake:1.15
-	virtual/pkgconfig"
+KEYWORDS="~amd64 ~x86"
+IUSE="debug"
 
-PATCHES=( "${FILESDIR}/${P}-01-fix-build-without-webkit.patch"
-          "${FILESDIR}/${P}-02-fix-memory-leak.patch" )
+RDEPEND="
+	app-text/gspell
+	dev-libs/glib:2
+	dev-libs/libical
+	dev-libs/libxml2
+	net-libs/webkit-gtk:4
+	x11-libs/cairo
+	x11-libs/gdk-pixbuf
+	x11-libs/gtk+:3
+	x11-libs/libnotify
+	x11-libs/pango
+"
+DEPEND="${RDEPEND}"
 
 src_configure() {
-	append-flags -I/usr/include/libical
-
-	econf \
-		--disable-dependency-tracking \
-		--without-libsyncml
-}
-
-src_install() {
-	emake DESTDIR="${D}" install || die
-	dodoc AUTHORS ChangeLog README TRANSLATORS
+	local myeconfargs=(
+		$(use_enable debug)
+	)
+	econf "${myeconfargs[@]}"
 }
