@@ -18,8 +18,7 @@ KEYWORDS="~amd64"
 IUSE=""
 S="${WORKDIR}/hamster-${P}"
 
-DEPEND="dev-python/gconf-python
-		gnome-base/gconf[introspection]
+DEPEND="gnome-base/gconf[introspection]
 		dev-python/pyxdg
 		>=x11-libs/gtk+-3.10
 		sys-devel/gettext

@@ -15,14 +15,14 @@ LICENSE="|| ( jetbrains_business-3.1 jetbrains_individual-4.1 jetbrains_educatio
 "
 SLOT="0"
 VER="$(ver_cut 1-2)"
-KEYWORDS="~amd64 ~x86"
+KEYWORDS="amd64"
 RESTRICT="bindist mirror splitdebug"
 IUSE="custom-jdk"
 
 RDEPEND="
 	!custom-jdk? ( virtual/jdk )"
 
-BUILD_NUMBER="201.7846.76"
+BUILD_NUMBER="202.6397.94"
 S="${WORKDIR}/idea-IU-${BUILD_NUMBER}"
 
 QA_PREBUILT="opt/${P}/*"
